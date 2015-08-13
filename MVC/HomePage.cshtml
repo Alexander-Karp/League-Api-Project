@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+}
+
+<h2>HomePage</h2>
+
+<script language="javascript" type="text/javascript">
+    /*****get drop down data*****/
+    function getjsondropdown(tflag, nflag, pflag, tb, nw, pg, func) {
+        $.ajax({
+            url: 'GetJsonDropDown',
+            type: 'GET',
+            contentType: 'application/json',
+            data: { table: tflag, network: nflag, program: pflag, tablename: tb, networkname: nw, programname: pg },
+            beforeSend: function () {
+                $('#loadimage').show();
+                $('#alertm').show();
+            },
+            complete: function () {
+                $('#loadimage').hide();
+                $('#alertm').hide();
+            },
+            success: function (sdata) {
+                func(sdata);
+            },
+            error: function () {
+                data = null;
+            }
+        })
+    }
+</script>
